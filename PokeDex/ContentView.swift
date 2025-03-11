@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject var viewModel = PokemonViewModel()
+    @State private var pokemonToSearch = ""
     
     private let numberOfColumns = [
         GridItem(.flexible()),
@@ -25,7 +26,13 @@ struct ContentView: View {
                         PokemonCellView(pokemon: pokemon,viewModel: viewModel)
                     }
                 }.padding(20)
-            }
+            } //Scroll
+            .searchable(text: $pokemonToSearch, prompt: "Search Pokemon")
+            .onChange(of: pokemonToSearch, perform: { newValue in
+                withAnimation {
+                    viewModel.filterPokeom(name: newValue)
+                }
+            })
             .navigationBarTitle("Pokedex", displayMode:.inline)
         }
         
