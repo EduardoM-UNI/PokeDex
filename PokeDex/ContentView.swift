@@ -22,26 +22,7 @@ struct ContentView: View {
             ScrollView{
                 LazyVGrid(columns: numberOfColumns){
                     ForEach(viewModel.filteredPokemon, id: \.self) { pokemon in
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(viewModel.getColorBasedOnType(type: pokemon.type))
-                                .cornerRadius(15)
-                            VStack {
-                                AsyncImage(url: URL(string: pokemon.imageUrl)) { image in
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                                .frame(width: 50, height: 50)
-                                .shadow(radius: 12)
-                                
-                                Text(pokemon.name)
-                                    .font(.body)
-                                    .foregroundColor(.white)
-                            }
-                        }
+                        PokemonCellView(pokemon: pokemon,viewModel: viewModel)
                     }
                 }.padding(20)
             }
@@ -55,3 +36,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
