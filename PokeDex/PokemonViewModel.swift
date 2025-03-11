@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUICore
 
 class PokemonViewModel:ObservableObject {
     @Published var listPokemon = [PokemonModel] ()
@@ -29,6 +30,34 @@ class PokemonViewModel:ObservableObject {
                     print ("Error : \(error.localizedDescription)")
                 }
             }
+        }
+    }
+    func getColorBasedOnType(type:String) -> Color{
+        switch type {
+        case "poison":
+            return .purple
+        case "fire":
+            return .red
+        case "water":
+            return .blue
+        case "bug","grass":
+            return .green
+        case "flying":
+            return .mint
+        case "normal":
+            return .pink
+        case "electric":
+            return .yellow
+        case "ground":
+            return .brown
+        case "fairy", "psychic", "dragon":
+            return .orange
+        case "fighting":
+            return .gray
+        case "ice","steel":
+            return .teal
+        default:
+            return .white
         }
     }
 }
